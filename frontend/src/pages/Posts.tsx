@@ -40,6 +40,5 @@ export const Posts = () => {
                 key={post.id}
             />)}
         </div >
-        <Footer />
     </>
 }
