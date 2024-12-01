@@ -21,7 +21,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             localStorage.setItem("token", token);
             navigate('/posts');
         } catch (err) {
-            alert("Error authenticating try again");
+            console.log(err);
         }
 
     }
