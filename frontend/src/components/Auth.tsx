@@ -3,6 +3,8 @@ import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { Backend_Url } from "../config";
+import { IoIosHome } from "react-icons/io";
+
 
 export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     const navigate = useNavigate();
@@ -25,6 +27,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
     }
     return <div className="flex my-[20%] lg:h-screen lg:my-0 lg:flex justify-center items-center">
         <div className="space-y-2 text-center w-[60%] lg:w-[40%]">
+            <div className="flex justify-center"><IoIosHome className="text-4xl cursor-pointer" onClick={() => { navigate('/') }} /></div>
             <div className="text-3xl font-bold">{type === "signup" ? "Create an account" : "Login to your account"}</div>
             <p>{type === "signup" ? "Already have an account?" : "Don't have an account?"} <Link to={type === "signup" ? "/signin" : "/signup"} className="underline underline-offset-2 text-blue-300 ml-2">{type === "signup" ? "Login" : "Signup"}</Link></p>
             {type === "signup" && <LabledInput label="Username" type="text" placeholder="Enter your username" onChange={(e) => {
@@ -47,7 +50,7 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
             }} />
             <div><button onClick={sendRequest} className="bg-blue-700 text-white font-semibold w-[100%] mt-2 p-2 rounded-lg">{type === "signup" ? "Sign Up" : "Log In"}</button></div>
         </div>
-    </div>
+    </div >
 }
 
 interface labledInputType {

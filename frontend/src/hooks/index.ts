@@ -80,7 +80,7 @@ export const usePosts = () => {
                 setPosts(response.data.posts);
                 setLoading(false);
             })
-    }, [posts]);
+    }, []);
 
     return {
         loading,

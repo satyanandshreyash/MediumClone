@@ -4,6 +4,7 @@ import { Avatar } from "../components/PostCard";
 import { PostSkeleton } from "../components/PostSkeleton";
 import { usePost, useUser } from "../hooks";
 import { useNavigate, useParams } from "react-router-dom";
+import { Footer } from "../components/Footer";
 
 export const Post = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ export const Post = () => {
         if (!user && !userLoading) {
             navigate("/signin")
         }
-    }, [user]);
+    }, [user, userLoading]);
 
     if (loading) {
         return <PostSkeleton />
@@ -35,6 +36,7 @@ export const Post = () => {
                 <div className="text-sm font-normal px-1 py-2 lg:text-lg lg:font-medium lg:px-6 lg:py-6 text-gray-400">{post?.content}</div>
             </div>
         </div>
+        <Footer />
     </>
 
 }

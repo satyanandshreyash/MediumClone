@@ -15,7 +15,7 @@ export const Publish = () => {
         if (!user && !userLoading) {
             navigate("/signin")
         }
-    }, [user]);
+    }, [user, userLoading]);
 
     return <>
         <Navbar />

@@ -4,6 +4,7 @@ import { PostCard } from "../components/PostCard"
 import { PostCardSkeleton } from "../components/PostCardSkeleton";
 import { usePosts, useUser } from "../hooks"
 import { useEffect } from "react";
+import { Footer } from "../components/Footer";
 
 export const Posts = () => {
     const { loading, posts } = usePosts();
@@ -14,7 +15,7 @@ export const Posts = () => {
         if (!user && !userLoading) {
             navigate("/signin")
         }
-    }, [user]);
+    }, [user, userLoading]);
 
     if (loading) {
         return <>
@@ -24,6 +25,7 @@ export const Posts = () => {
             <PostCardSkeleton />
             <PostCardSkeleton />
             <PostCardSkeleton />
+            <Footer />
         </>
     }
     return <>
@@ -38,5 +40,6 @@ export const Posts = () => {
                 key={post.id}
             />)}
         </div >
+        <Footer />
     </>
 }

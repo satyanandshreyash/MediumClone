@@ -5,6 +5,7 @@ import { Post } from './pages/Post'
 import './App.css'
 import { Posts } from './pages/Posts'
 import { Publish } from './pages/Publish'
+import { Home } from './pages/Home'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/post/:id' element={<Post />} />
