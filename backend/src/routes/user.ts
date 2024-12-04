@@ -19,7 +19,7 @@ userRouter.post('/signup', async (c) => {
     const body = await c.req.json()
     const parsedData = signupSchema.safeParse(body);
     if (!parsedData.success) {
-        c.status(411)
+        c.status(400)
         return c.json({ message: parsedData.error.issues[0].message })
     }
     try {
@@ -59,7 +59,7 @@ userRouter.post('/signin', async (c) => {
     const body = await c.req.json()
     const parsedData = signinSchema.safeParse(body);
     if (!parsedData.success) {
-        c.status(411)
+        c.status(400)
         return c.json({ message: parsedData.error.issues[0].message })
     }
     try {
@@ -75,7 +75,7 @@ userRouter.post('/signin', async (c) => {
 
         if (user.password !== body.password) {
             c.status(400)
-            return c.json({ message: "Invalid password" })
+            return c.json({ message: "Incorrect password" })
         } else {
             const token = await sign({ id: user.id }, c.env.JWT_SECRET)
             return c.json({

@@ -13,19 +13,30 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
         email: "",
         password: ""
     })
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
     async function sendRequest() {
+        setLoading(true);
+        setError(null);
         try {
             const response = await axios.post(`${Backend_Url}/api/v1/user/${type === "signup" ? "signup" : "signin"}`, signupInputs);
             const token = response.data.token;
             localStorage.setItem("token", token);
             navigate('/posts');
-        } catch (err) {
-            console.log(err);
+        } catch (err: any) {
+            console.log(err.response.data.message);
+            setError(err.response.data.message || "Something went wrong. Please try again.");
+        } finally {
+            setLoading(false);
         }
-
     }
-    return <div className="flex my-[20%] lg:h-screen lg:my-0 lg:flex justify-center items-center">
+    return <div className="relative flex my-[20%] lg:h-screen lg:my-0 lg:flex justify-center items-center">
+        {/* {loading && (
+            <div className="absolute inset-0 flex justify-center items-center bg-gray-800 bg-opacity-80 z-10">
+                <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12"></div>
+            </div>
+        )} */}
         <div className="space-y-2 text-center w-[60%] lg:w-[40%]">
             <div className="flex justify-center"><IoIosHome className="text-4xl cursor-pointer" onClick={() => { navigate('/') }} /></div>
             <div className="text-3xl font-bold">{type === "signup" ? "Create an account" : "Login to your account"}</div>
@@ -48,7 +59,13 @@ export const Auth = ({ type }: { type: "signup" | "signin" }) => {
                     password: e.target.value
                 })
             }} />
-            <div><button onClick={sendRequest} className="bg-blue-700 text-white font-semibold w-[100%] mt-2 p-2 rounded-lg">{type === "signup" ? "Sign Up" : "Log In"}</button></div>
+            <p className="text-red-500 text-sm font-medium">{error}</p>
+            <div>
+                <button onClick={sendRequest} className={`${loading ? "bg-gray-600 cursor-not-allowed" : "bg-blue-700"
+                    } text-white font-semibold w-[100%] mt-2 p-2 rounded-lg`} disabled={loading}>{loading ? "Please wait..." : type === "signup" ? "Sign Up" : "Log In"}
+                </button>
+            </div>
+
         </div>
     </div >
 }

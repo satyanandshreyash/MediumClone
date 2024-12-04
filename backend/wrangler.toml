@@ -5,7 +5,7 @@ compatibility_date = "2024-11-23"
 # compatibility_flags = [ "nodejs_compat" ]
 
 [vars]
-DATABASE_URL="connection_pool_url"
+DATABASE_URL="your_connection_pool_url"
 JWT_SECRET="your_jwt_secret"
 
 # [[kv_namespaces]]
